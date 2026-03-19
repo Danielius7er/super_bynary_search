@@ -159,8 +159,17 @@ test "lowerBound encontra primeiro elemento >= target" {
 test "upperBound encontra primeiro elemento > target" {
     const array = [_]i32{ 2, 5, 5, 5, 12, 16, 23, 38, 45, 56, 67, 78 };
     
+    // Teste 1: upperBound(array, 5) → índice 4 (valor 12 > 5)
     try testing.expectEqual(@as(usize, 4), upperBound(i32, &array, 5));
-    try testing.expectEqual(@as(usize, 4), upperBound(i32, &array, 3));
+    
+    // Teste 2: upperBound(array, 3) → índice 1 (valor 5 > 3)
+    try testing.expectEqual(@as(usize, 1), upperBound(i32, &array, 3));
+    
+    // Teste 3: upperBound(array, 2) → índice 1 (valor 5 > 2)
+    try testing.expectEqual(@as(usize, 1), upperBound(i32, &array, 2));
+    
+    // Teste 4: upperBound(array, 100) → 12 (nenhum > 100, retorna len)
+    try testing.expectEqual(@as(usize, 12), upperBound(i32, &array, 100));
 }
 
 test "mergeSort ordena array corretamente" {
